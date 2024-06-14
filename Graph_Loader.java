@@ -6,17 +6,22 @@ import java.util.List;
 
 /**
  * Graph_Loader will load graphs from a text folder.
- * Graphs will be represented as lines, with their neighbours and resistances
- * as comma seperated numbers:
+ * Graphs will be stored as
+ * <GraphName>
+ * <NodeName> : <x, y> | <Neighbour> : <Distance>
+ * ...
+ * 
  * ie:
- * 0,0|1,3 2,4
- * 3,0|2,5
- * 0,4
- * would be a triangle, shaped like:
- * 1 1 1
- * 1 1
- * 1 1
- * 1
+ * Triangle
+ * A : 0, 0 | B : 3, C : 4
+ * B : 3, 0 | A : 3, C : 5
+ * C : 0, 4 | A : 4, B : 5
+ * would be a graph called Triangle, shaped like:
+ * A___B
+ * |  /
+ * | /
+ * |/
+ * C
  * 
  * @author Jack
  * @version 14/06/2024
@@ -25,10 +30,6 @@ public class Graph_Loader
 {
     // the graph we loaded
     private Graph loaded;
-    // The nodes for our graph
-    private List<Node> nodes;
-    // The edges for our graph
-    private List<String> Edges;
 
     /**
      * Constructor for objects of class Gaph_Loader
@@ -38,13 +39,13 @@ public class Graph_Loader
     {
         this("Demo.txt");
     }
+
     public Graph_Loader(String filename)
     {   
-        List<String> nodeStrings = new ArrayList<>();
-        List<String> edgeStrings = new ArrayList<>();
         try {
-          File myObj = new File(filename);
-          Scanner myReader = new Scanner(myObj);
+          File graphFile = new File(filename);
+          Scanner myReader = new Scanner(graphFile);
+          this.loaded = new Graph(myReader.nextLine());
           while (myReader.hasNextLine()) {
             String line = myReader.nextLine();
             System.out.println(line);
@@ -53,6 +54,7 @@ public class Graph_Loader
           myReader.close();
         } catch (FileNotFoundException e) {
             System.out.println("Error loading file: " + filename);
+            e.printStackTrace();
         }
     }
 

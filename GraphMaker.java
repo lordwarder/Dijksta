@@ -13,26 +13,28 @@
 public class GraphMaker
 {
     // instance variables - replace the example below with your own
-    private int x;
+    private Graph randomGraph;
 
     /**
-     * Constructor for objects of class GraphMaker
+     * Default Constructor for objects of class GraphMaker
+     * TODO learn how to generate random numbers
+     * TODO learn how to get a random element from a set
      */
     public GraphMaker()
     {
-        // initialise instance variables
-        x = 0;
+        Graph temp = new Graph("Random")
+        //Add 7 - 9 Nodes to temp
+
+        //for each Node in temp, get 3 random nodes from graph.
+
+        //for each of these three nodes, if they are different from the first, 
+        //add them to each other's neighbour's list, and add a resistance to 
+        //their map.
+
+        //Choose a random node as your source
+        Node source = new Node("S");
+        this.randomGraph = Dijkstra(temp, source).graph;
     }
 
-    /**
-     * An example of a method - replace this comment with your own
-     *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
-     */
-    public int sampleMethod(int y)
-    {
-        // put your code here
-        return x + y;
-    }
+    
 }
