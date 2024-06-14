@@ -1,6 +1,6 @@
 import java.awt.Graphics;
-import java.awt.Point;
-import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
 import javax.swing.JPanel;
 
 /**
@@ -19,34 +19,26 @@ public class Graph extends JPanel
     //How thick to draw the edges. This may be also be related to their weights
     private static final int EDGE_WIDTH = 2;
     private static final int NODE_SIZE = 5;
-    //TODO add methods to modify edges and nodes
-    private List<Point> nodes;
-    private List<Edge> edges;
-    //TODO add enemies to the starting node, then have them move towards the end node using Dijkstra's algorithm.
-    public final Point startingNode;
-    public final Point endingNode;
     
-    // TODO give Nodes better names
-    public static record Edge(Node node1, Node node2, int resistance, Colour c) {}
-    /*
-     * States:
-     * 0 - not visited
-     * 1 - visited but not explored
-     * 2 - 
-     * /
+    public String name = "Graph";
+    public Set<Node> nodes = new HashSet<>();
     
-    public static record Node(List<Node> neighbours, int state) {}
-
-    /**
-     * Constructor for objects of class Graph
-     */
-    public Graph(List<Node> nodes, List<Edge> edges)
+    Graph(String name)
     {
-        this.nodes = nodes;
-        this.edges = edges;
-        this.startingNode = nodes.get(0);
-        // Add the last node in the list
-        this.endingNode = nodes.get(nodes.size() - 1);
+        this.name = name;
+    }
+
+    public void addNode(Node nodeA) 
+    {
+        nodes.add(nodeA);
+    }
+    
+    public void pprint()
+    {
+        System.out.println(this.name);
+        for (Node node : nodes) {
+            System.out.println(node.printString());
+        }
     }
 
     @Override
